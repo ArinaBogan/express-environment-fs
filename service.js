@@ -3,12 +3,14 @@ const path = './storage/environment.json';
 
 function getAllEnvironment() {
     const array = JSON.parse(fs.readFileSync(path));
+    if (!array.length) return 'array is empty';
     return array;
 };
 
 function getEnvironmentById(id) {
     const array = JSON.parse(fs.readFileSync(path));
-    const filtered = array.filter((el) => el.id == id)
+    const filtered = array.filter((el) => el.id == id);
+    if (!filtered.length) return 'id is not found';
     return filtered;
 };
 
@@ -42,9 +44,10 @@ function updateEnvironment(id, label, category, priority) {
 
 function deleteEnvironment(id) {
     const array = JSON.parse(fs.readFileSync(path));
-    const filtered = array.filter((el) => el.id != id)
+    const filtered = array.filter((el) => el.id != id);
+    if (array.length == filtered.length) return 'id is not found';
     fs.writeFileSync(path, JSON.stringify(filtered));
     return filtered;
 }
 
-module.exports = { getAllEnvironment, getEnvironmentById, createEnvironment, updateEnvironment,deleteEnvironment }
+module.exports = { getAllEnvironment, getEnvironmentById, createEnvironment, updateEnvironment, deleteEnvironment }

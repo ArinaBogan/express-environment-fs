@@ -14,6 +14,7 @@ app.get('/:id', (req, res) => {
     try {
         const { id } = req.params;
         const data = getEnvironmentById(id);
+        res.status(202).send(data);
     }
     catch (error) {
         res.status(404).send(data);
@@ -24,6 +25,7 @@ app.post('/', (req, res) => {
     try {
         const { label, category, priority } = req.body;
         const data = createEnvironment(label, category, priority);
+        res.status(202).send(data);
     }
     catch (error) {
         res.status(405).send(data);
@@ -35,6 +37,7 @@ app.put('/:id', (req, res) => {
         const { id } = req.params;
         const { label, category, priority } = req.body;
         const data = updateEnvironment(id, label, category, priority);
+        res.status(202).send(data);
     }
     catch (error) {
         res.status(405).send(data);
@@ -45,6 +48,7 @@ app.delete('/:id', (req, res) => {
     try {
         const { id } = req.params;
         const data = deleteEnvironment(id);
+        res.status(202).send(data);
     }
     catch (error) {
         res.send(error.message);
